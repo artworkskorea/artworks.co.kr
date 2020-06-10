@@ -1,0 +1,564 @@
+﻿@{
+    string language = (ViewBag.Language == "English" ? "/KR" : "/EN");
+    ViewBag.Title = "Artworks Korea";
+
+    string file = string.Empty;
+    if (System.Configuration.ConfigurationManager.AppSettings["IsLIVE"] == "0")
+    {
+        file = System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"];
+    }
+    else
+    {
+        file = (ViewBag.Country == "KR") ? System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"] : System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"].Replace("file3", "cdn3");
+    }
+	
+	string[] arr = new string[]
+	{
+	    "offline-centum-1.jpg",
+	    "offline-centum-2.jpg",
+	    "offline-centum-3.jpg",
+		"offline-centum-4.jpg",
+		"offline-centum-5.jpg",
+		"offline-centum-6.jpg",
+		"offline-centum-7.jpg",
+		"offline-centum-8.jpg",
+		"offline-centum-9.jpg",
+		"offline-centum-10.jpg",
+		"offline-centum-11.jpg",
+		"offline-centum-12.jpg",
+		"offline-centum-13.jpg",
+		"offline-centum-14.jpg",
+		"offline-centum-15.jpg"
+	};
+
+	string[] shuffle = Artworks.Controllers.HomeController.RandomizeStrings(arr);
+	string[] shuffleResult = shuffle.Take(3).ToArray();
+
+
+}
+
+<style>
+
+    img.mfp-img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    line-height: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 0 40px;
+    margin: 0 auto;
+}
+
+
+.mfp-img1,.mfp-img2,.mfp-img3,.mfp-img4,.mfp-img5,.mfp-img6{
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    line-height: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 0 40px;
+    margin: 0 auto;
+    position:absolute;
+    
+}
+
+.pager2 {    
+    vertical-align: middle;
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: -100px;
+
+
+}
+.pager2 > span { padding:10px;  }
+
+    .btn1, .btn2 {
+        cursor: pointer;
+       
+    }
+
+    .offline_tab {
+        background: white;
+        border-radius: 5px;
+        padding: 2px;
+        opacity:0.8;
+        margin-left: auto;
+        margin-right: auto;
+        width:278px;
+    }
+.bx-controls.bx-has-pager{
+    display:none;
+}
+
+.main-li{
+    left: 0px;
+}
+</style>
+
+    <ul class="slides-main">
+        @{
+            for (int i = 1; i < 6; i++)
+            {
+            
+                <li class="main-li">
+                    <section id="intro@(Html.Raw((i == 1)? "" : i.ToString()))" class="parallax main-slider" data-start="background-position: 50% 0px;" data-100p="background-position: 50% 105px;">
+                        <div class="section-overlay" style="background:none;">
+                            <div class="float-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div id="carousel-intro" class="carousel-nouse">
+                                                <div class="carousel-inner text-center">
+                                                    <div class="active item">
+                                                        <h5 class="smoke">THE</h5>
+                                                        <h1 class="text-uppercase light">New LifeStyle Store</h1>
+                                                        <a href="#services" class="btn hidden-xs">VIEW OUR SERVICES</a>
+                                                    </div>
+                                                    <!--div class="item">
+                                                        <h5 class="smoke">Perfect design for</h5>
+                                                        <h1 class="text-uppercase light">Your beautiful website</h1>
+                                                        <a href="#services" class="btn hidden-xs">See More</a>
+                                                        <span class="hidden-xs">&nbsp;</span>
+                                                        <a data-toggle="lightbox" data-width="1140" href="http://vimeo.com/56539696" data-remote="http://player.vimeo.com/video/56539696" class="btn">Play Reel</a>
+                                                    </div>
+                                                    <div class="item">
+                                                        <h5 class="smoke">An easy way to</h5>
+                                                        <h1 class="text-uppercase light">Showcase your works</h1>
+                                                        <a href="#works-top" class="btn">View Our Works</a>
+                                                    </div-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </li>
+            }
+        }
+</ul>
+    <section id="services" class="white-bg" style="padding-bottom:40px">
+        <div class="container" >
+            <div class="row divide-md">
+                <!-- Top content / image service -->
+                @*<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 divide-md text-center">
+                    <h2><img src="@file/funshop_logo.png"></h2>
+                    <p>
+                        국내에 아직 소개되지 않았거나, 소개는 되었으나 그 가치를 <br>인정 받지 못한 제품을 우선 소개하는 국제적인 콜렉션 커머스 서비스
+                    </p><br>
+                </div>*@
+                <div class="clearfix" style="padding-bottom:30px"></div>
+                <!-- Service #1 -->
+                <div class="col-sm-3 divide-md text-center" style="padding: 0 25px 0 25px; cursor:pointer" onclick="window.open('http://www.funshop.co.kr', '_blank');">
+                    <div style="background-color:#F6F6F6; margin:5px; padding:25px 35px 55px 35px; height:@ViewBag.IntroHeight;">
+                        <div class="delight-icon-services">
+                            <img src="@file/funshop_logo.png" style="padding-top:10px;">
+                        </div>
+                        <div class="divide-xs"></div>
+                        <h3></h3>
+                        <p class="p-icons">                            
+                            @ViewBag.FunshopIntroduce                            
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service #1 -->
+                <div class="col-sm-3 divide-md text-center" style="padding: 0 25px 0 25px; cursor:pointer" onclick="window.open('http://www.raksik.com', '_blank');">
+                    <div style="background-color:#F6F6F6; margin:5px; padding:25px 35px 35px; height:@ViewBag.IntroHeight;">
+                        <div class="delight-icon-services">
+                            <img src="@file/raksik_logo.png">
+                        </div>
+                        <div class="divide-xs"></div>
+                        <h3></h3>
+                        <p class="p-icons">
+                            @ViewBag.RaksikIntroduce
+                        </p>
+                    </div>
+                </div>
+                <!-- Service #2 -->
+                <div class="col-sm-3 divide-md text-center" style="padding: 0 25px 0 25px; cursor:pointer" onclick="window.open('http://artworkssupply.com/index', '_blank');">
+                    <div style="background-color:#F6F6F6; margin:5px; padding:25px 35px 35px; height:@ViewBag.IntroHeight;">
+                        <div class="delight-icon-services" style="margin-top:8px">
+                            <img src="@file/supply_logo.png">
+                        </div>
+                        <div class="divide-xs" style="padding-top:0px;"></div>
+                        <h3></h3>
+                        <p class="p-icons">
+                            @ViewBag.UrbanIntroduce                            
+                        </p>
+                    </div>
+                </div>
+                <!-- Service #3 --> 
+                <div class="col-sm-3 divide-md text-center" style="padding: 0 25px 0 25px; cursor:pointer" onclick="window.open('http://funtenna.funshop.co.kr', '_blank');">
+                    <div style="background-color:#F6F6F6; margin:5px; padding:25px 35px 35px; height:@ViewBag.IntroHeight;">
+                        <div class="delight-icon-services">
+                            <img src="@file/funtenna_logo.png">
+                        </div>
+                        <div class="divide-xs"></div>
+                        <h3></h3>
+                        <p class="p-icons">@ViewBag.FuntennaIntroduce</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr class="margin-top">
+
+    <section id="gallery-top" class="parallax" data-bottom-top="background-position: 50% 275px;" data-top-bottom="background-position: 50% -400px;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 divide-xl text-center">
+                    <h1 class="light">Our Products</h1>
+                    <h5 class="smoke2">Browse through beautiful products</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="white-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Gallery item #1 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_01.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_01.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item1</h3>
+                                    <div class="work-descr">@ViewBag.Item1s</div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item1c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Gallery item #2 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_02.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_02.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item2</h3>
+                                    <div class="work-descr">@ViewBag.Item2s </div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item2c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Gallery item #3 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_03.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_03.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item3</h3>
+                                    <div class="work-descr">@ViewBag.Item3s</div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item3c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Gallery item #4 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_04.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_04.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item4</h3>
+                                    <div class="work-descr">@ViewBag.Item4s</div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item4c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Gallery item #5 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_05.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_05.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item5</h3>
+                                    <div class="work-descr">@ViewBag.Item5s</div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item5c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Gallery item #6 -->
+                <div class="col-xs-6 col-sm-4 gallery-item">
+                    <div class="thumbnail">
+                        <a href="@file/main_prrodusts_06.jpg" class="link" title="">
+                            <img src="@file/main_prrodusts_06.jpg" data-no-retina alt="">
+                            <div class="gallery-overlay">
+                                <div class="work-intro">
+                                    <h3 class="work-title">@ViewBag.Item6</h3>
+                                    <div class="work-descr">@ViewBag.Item6s</div>
+                                    <div class="work-descr"><img src="@file/@ViewBag.Item6c" class="work-descr-nation" /></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offline-top" class="parallax" data-bottom-top="background-position: 50% 200px;" data-top-bottom="background-position: 50% -150px;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 divide-xl text-center">
+                    <h5 class="smoke2">FUNSHOP</h5>
+                    <h1 class="light">Offline Store</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @{
+        Random r = new Random();
+        //string rnd = (r.Next(1,15)).ToString();
+        string rnd = "1";
+      }
+    <section id="offline-gallery" class="white-bg">
+        <div id="div_offline" class="container-fluid" style="background-image:url(@file/new-offline-@(rnd).jpg);background-position: 50%;height:662px;">
+            <div style="width:100%;text-align:center; height:75px" id="offbtn1">
+                <br><br> <div class="offline_tab"><a class="btn1"><b>[Seoul] Kangnam</b></a> | <a class="btn2">[Seoul] Nonhyeon </a><br></div>
+            </div>
+            <div style="width:100%;text-align:center; height:75px; display:none;" id="offbtn2">
+                <br><br><div class="offline_tab"><a class="btn1">[Seoul] Kangnam</a> | <a class="btn2"><b>[Seoul] Nonhyeon</b></a></div><br>
+            </div>
+
+
+            <div>
+                @*
+                <div class="row" id="off1">
+                    @{
+                        Random r = new Random();
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string rnd = (r.Next(4) + 1 + (i * 4)).ToString();
+                            <div class="col-xs-6 col-sm-4 gallery-item">
+                                <div class="thumbnail">
+                                    <img src="@file/offline-@(rnd).jpg" data-no-retina alt="">
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="row" id="off2" style="display:none;">
+                    @{
+
+                        foreach (string s in shuffleResult)
+                        {
+                            <div class="col-xs-6 col-sm-4 gallery-item">
+                                <div class="thumbnail">
+                                    <img src="@(file)/@(s)" data-no-retina alt="">
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                *@
+
+
+                <div id="map" class="map-overlay js-active" style="position:absolute;">
+                    <div class="non-bg" style="height:0px;"></div>
+                    <div id="gmap" style="opacity:0"></div>
+                    <div class="map-toggle">
+                        <div class="map-icon">
+                        </div>
+                        <div class="map-text">
+                            <div class="map-open">OPEN OFFLINE STORE MAP <i class="fa fa-angle-up"></i></div>
+                            <div class="map-close">
+                                <br>
+                                <font style="color:#aaa;	letter-spacing: 2px;">
+                                    <span id="offPhone">@ViewBag.OfflinePhone</span><br>
+                                    <span id="offAddr">@ViewBag.OfflineAddress</span><br>
+                                    <br>
+                                </font>
+                                CLOSE OFFLINE STORE MAP <i class="fa fa-angle-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br><br>
+            </div>
+        </div>
+
+
+
+
+</section>
+
+    <section id="contact" class="white-bg" style="padding-top:100px; z-index:2;">
+        <div class="container">
+            <div class="row divide-md text-center">
+                <div class="divide-md">
+                    <h2>Contact</h2>
+                </div>
+                <!-- Icon #1 -->
+                <div class="col-sm-4 divide-sm text-center">
+                    <div class="delight-icon-info">
+                        <svg viewBox="0 0 32 32">
+                            <use xlink:href="#iphone"></use>
+                        </svg>
+                    </div>
+                    <div class="divide-xs"></div>
+                    <p>@ViewBag.Phone</p>
+                    <h4>Call Us</h4>
+                </div>
+                <!-- Icon #2 -->
+                <div class="col-sm-4 divide-sm text-center">
+                    <div class="delight-icon-info">
+                        <svg viewBox="0 0 32 32">
+                            <use xlink:href="#tag"></use>
+                        </svg>
+                    </div>
+                    <div class="divide-xs"></div>
+                    <p>@ViewBag.Address</p>
+                    <h4>Office</h4>
+                </div>
+                <!-- Icon #3 -->
+                <div class="col-sm-4 divide-sm text-center">
+                    <div class="delight-icon-info">
+                        <svg viewBox="0 0 32 32">
+                            <use xlink:href="#email-mail"></use>
+                        </svg>
+                    </div>
+                    <div class="divide-xs"></div>
+                    <p>post＠artworks.co.kr</p>
+                    <h4>Email</h4>
+                </div>
+                <div class="clearfix"></div>
+                <div class="divide-xs"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Start contact header / Google Map -->
+    <!--section id="gmap-top">
+        <div id="gmap"></div>
+        <div class="map-overlay">
+            <div class="map-toggle">
+                <div class="map-icon">
+                    <img alt="Open the Map" src="img/map-pin-light.png">
+                </div>
+                <div class="map-text">
+                    <div class="map-open">Open the map <i class="fa fa-angle-down"></i></div>
+                    <div class="map-close">Close the map <i class="fa fa-angle-up"></i></div>
+                </div>
+            </div>
+        </div>
+    </section-->
+    <!-- End contact header / Google Map -->
+
+
+<script>
+	$(function () {
+
+	    var slider = $('.slides-main').bxSlider({
+	        mode: 'fade',
+	        captions: false,
+	        randomStart: true,
+	        auto: true,
+	        pause: 5000,
+	        controls: false,
+            speed:500
+	    });
+
+		$(".btn1").click(function (event) {
+			event.preventDefault();
+			//$("#off2").hide();
+			//$("#off1").hide();
+			//$("#off1").show();
+			
+		    $("#div_offline").css("background-image", "url(@file/new-offline-@(rnd).jpg)");
+
+			$("#offbtn2").hide();
+			$("#offbtn1").show();
+			$("#offAddr").text("@(ViewBag.OfflineAddress)");
+		    $("#offPhone").text("@(ViewBag.OfflinePhone)");
+		    
+			map.setCenter(new google.maps.LatLng(37.4955827, 127.0275969));
+			marker.setPosition(new google.maps.LatLng(37.4955827, 127.0275969));
+
+			var tempHeight = $("#offline-gallery").height();
+			//$("#gmap").css("height", $("#offline-gallery").height());
+			$("#gmap").css("height", tempHeight);
+			google.maps.event.trigger(map, "resize");
+		});
+
+		$(".btn2").click(function (event) {
+			event.preventDefault();
+			//$("#off1").hide();
+			//$("#off2").hide();
+			//$("#off2").show();
+			$("#div_offline").css("background-image", "url(@file/new-offline-centum-@(rnd).jpg)");
+
+			$("#offbtn1").hide();
+			$("#offbtn2").show();
+			$("#offAddr").text("@(ViewBag.OfflineAddress2)");
+		    $("#offPhone").text("@(ViewBag.OfflinePhone2)");
+            
+            map.setCenter(new google.maps.LatLng(37.5073319, 127.0203929));
+            marker.setPosition(new google.maps.LatLng(37.5073277, 127.0225816));
+			var tempHeight = $("#offline-gallery").height();
+			//$("#gmap").css("height", $("#offline-gallery").height());
+			$("#gmap").css("height", tempHeight);
+			google.maps.event.trigger(map, "resize");
+		});
+
+    	var mapOptions = {
+    		zoom: 16,
+    		zoomControl: true,
+    		zoomControlOptions: {
+    			style: google.maps.ZoomControlStyle.SMALL,
+    			position: google.maps.ControlPosition.RIGHT_TOP
+    		},
+    		mapTypeControl: false,
+    		scaleControl: true,
+    		scrollwheel: false,
+    		streetViewControl: false,
+    		draggable: true,
+    		center: new google.maps.LatLng(37.4955827, 127.0275969),
+    		styles: [{ "featureType": "water", "elementType": "geometry.fill", "stylers": [{ "color": "#d3d3d3" }] }, { "featureType": "transit", "stylers": [{ "color": "#808080" }, { "visibility": "off" }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "visibility": "on" }, { "color": "#b3b3b3" }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "road.local", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "weight": 1.8 }] }, { "featureType": "road.local", "elementType": "geometry.stroke", "stylers": [{ "color": "#d7d7d7" }] }, { "featureType": "poi", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#ebebeb" }] }, { "featureType": "administrative", "elementType": "geometry", "stylers": [{ "color": "#a7a7a7" }] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "landscape", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#efefef" }] }, { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#696969" }] }, { "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "visibility": "on" }, { "color": "#737373" }] }, { "featureType": "poi", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi", "elementType": "labels", "stylers": [{ "visibility": "off" }] }, { "featureType": "road.arterial", "elementType": "geometry.stroke", "stylers": [{ "color": "#d6d6d6" }] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, {}, { "featureType": "poi", "elementType": "geometry.fill", "stylers": [{ "color": "#dadada" }] }]
+    	};
+    	var mapElement = document.getElementById('gmap');
+    	var map = new google.maps.Map(mapElement, mapOptions);
+    	var image = '/img/map-pin.png';
+    	var marker = new google.maps.Marker({
+    		position: new google.maps.LatLng(37.4955827, 127.0275969),
+    		map: map,
+    		icon: image
+    	});
+
+		//map.setCenter(new google.maps.LatLng(35.168674, 129.129334));
+
+    	$(".btn1").trigger("click");
+
+    });
+
+
+</script>
+   
+    

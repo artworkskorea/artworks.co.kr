@@ -1,0 +1,298 @@
+﻿@{
+    ViewBag.Title = "Artworks Korea - Brand";
+    string language = (ViewBag.Language == "English" ? "/KR" : "/EN");
+    char[] consonant = new char[] { 'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
+
+    string c = string.Empty;
+    if (Request.QueryString["c"] != null) { 
+        c = Request.QueryString["c"].ToUpper();
+    }
+    string t = "d";
+    if (Request.QueryString["t"] != null)
+    {
+        t = Request.QueryString["t"].ToLower();
+    }
+
+    // 실시간 수정이 가능하도록 cshtml 에 브랜드 리스트 저장        
+    List<string[]> brand = new List<string[]>();
+    /////////////////////////////////////////////////////////////////////////////
+    // 알파벳, 자음, 영문브랜드, 국문브랜드, 설명, 독점(d) or 리테일(r), 판매국가, 우선출력여부
+    /////////////////////////////////////////////////////////////////////////////
+    
+    ////2018-02-26 신규추가
+    //brand.Add(new string[] { "A", "ㅇ", "AndreeJardin", "안드레자뎅", "자데데덷ㅇ", "d", "미국", "1" });
+    brand.Add(new string[] { "F", "ㅍ", "Fiorira", "피오리라", "당신에게 차분히 스며드는 하우징 브랜드", "d", "미국", "1" });
+    brand.Add(new string[] { "S", "ㅅ", "SlowWatches", "슬로우왓치스", "시간이 느리게 가는 것이 아닌 오늘 나의 위치를 확인한다는 것은 하루라는 시간을 아까게 되는 마음가지 챙겨볼 수 있습니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "A", "ㅇ", "AboutVintage", "어바웃빈티지", "덴마크 코펜하겐에서 시작한 타임 피스 브랜드입니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "D", "ㄷ", "Dottus", "도터스", "까다로운 이탈리아 감성 휴지통", "d", "미국", "1" });
+    brand.Add(new string[] { "H", "ㅇ", "HersteraGarden", "오마이가든", "단순히 베란다에서 화분을 놓아두는 것에서 더욱 나아가, 조금 더 심미적으로 아름답고 멋지게 꾸며진 가드닝을 위한 시작", "d", "미국", "1" });
+    brand.Add(new string[] { "A", "ㅇ", "Acera", "아세라", "독특한 세라믹 기술과 특허 기술을 엄격한 제조 공정에 도입하고 전통과 현대의 디자인을 모두 채택한 제품", "d", "미국", "1" });
+    brand.Add(new string[] { "D", "ㄷ", "Diytile", "DIY타일", "-", "d", "미국", "1" });
+    brand.Add(new string[] { "A", "ㅇ", "Aer", "에이이알", "체계적인 수납시스템으로 다양한 가방 제품을 소개하고 있습니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "R", "ㄹ", "ReutterPorzellan", "로이터 포세린", "하나하나의 작은 모형을 만들어내고 마감하기까지 숙련된 장인들의 손에 의해 제작되어지는 미니어처", "d", "미국", "1" });
+    ////2018-02-26 신규추가
+    
+    brand.Add(new string[] { "C", "ㅊ", "chairslippers", "체어 슬리퍼", "아파트 생활에 가장 큰 사회적 이슈인 층간소음을 테니스공에 아이디어를 얻어 줄여주는 의자용 커버입니다.", "d", "미국", "1" });
+	brand.Add(new string[] { "V", "ㅂ", "Varidesk", "베리데스크", "스탠딩 책상의 국제적인 표준. 세계 40개국으로 수출하는 높이 조절 책상.", "d", "미국", "1" });
+    brand.Add(new string[] { "S", "ㅅ", "Surplus Systems", "서플러스시스템즈", "홈 인테리어용 접이식 수납 박스", "d", "터키", "1" });
+    brand.Add(new string[] { "S", "ㅅ", "sousvant", "수반트", "일류 레스토랑의 스테이크를 즐길 수 있도록 제안된 가장 손쉬운 조리 기계.", "d", "미국", "1" });
+    brand.Add(new string[] { "B","ㅂ","busybeaver","비지비버","일본 현지에서 숙련된 직공에 의해서 수작업으로 이루어지는 비지비버는 범용성을 기준으로 철저한 검품하에 제작되어 좋은 내구성을 지닌 비즈니스맨들을 위한 가방입니다.","d","일본","1"});
+    brand.Add(new string[] { "N", "ㄴ", "napkin", "냅킨 포에버", "잉크나 흑연으로 된 심이 아닌 Puntale in lega Ethergraf로 제작된 심으로 만든 반영구적인 이탈리아 펜 제조회사입니다.", "d", "이탈리아", "1" });
+    brand.Add(new string[] { "N", "ㄴ", "nadachair", "나다체어", "1985년부터 시작된 나다체어는 허리 통증 완화 및 건강을 생각한 특허받은 제품으로 기술력이 우수하여 NASA 우주 비행사들에게 보급되는 허리보조기구 제조업체입니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "C", "ㅋ", "calderaintl", "넥 레스트", "경추보호를 위해 설계된 넥 레스트는 목의 스프링같은 역할을 해주며 긴장된 목의 근육을 완화시켜주는 제품입니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "P", "ㅍ", "powerpractical", "루미누들", "아웃도어 환경에서 사용되는 램프와 충전 배터리 등 다양한 활동을 위한 아이디어 제품을 제조하는 회사입니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "Z", "ㅈ", "zoffoli", "조폴리 지오그래피카", "세계 3대 지구본 제작 회사인 지오 그래피카는 매년 3만개의 지구본을 제작해 수출하는 업체입니다.", "d", "이탈리아", "1" });
+    brand.Add(new string[] { "T", "ㅌ", "Tiny", "타이니", "쉽게 만들고 여행을 기억하거나 설레게 하는 미니어쳐", "d", "미국", "1" });
+    brand.Add(new string[] { "P", "ㅍ", "thepropertyof", "프러퍼티 오브", "현대인들의 니즈를 파악하고 고전적인 가방의 디자인, 구조 그리고 기능을 함께 담아 실용적인 형태로 가방을 제조하는 업체입니다.", "d", "네덜란드", "1" });
+    brand.Add(new string[] { "S", "ㅅ", "SELF-SCALING-AGEUN", "셀프 스케일링 아개운 칫솔", "펀샵에서만 제작, 판매하는 아개운 칫솔은 개운함이 장점인 펀샵의 베스트 셀러 제품입니다.", "d", "한국", "1" });
+    brand.Add(new string[] { "L", "ㄹ", "Life-chair", "라이프 체어", "허리를 꼿꼿이 세우고 앉아 쉰다는 기본을 넘어서 마치 중력이 없는 공간에 둥둥 떠있는 듯한 안락함을 제공합니다.", "d", "미국", "1" });
+    brand.Add(new string[] { "P", "ㅍ", "packmate", "팩 메이트", "진공청소기가 필요하지 않아 어디서든 내용물을 압축시킬 수 있는 여행용 압축팩 제품입니다.", "d", "영국", "1" });
+    brand.Add(new string[] { "S", "ㅅ", "stackers", "스태커스", "귀금속이나 작지만 중요한 물품 등을 보관할 수 있도록 디자인된 보관함은 생활공간의 멋을 더해주는 제품입니다.", "d", "영국", "1" });
+    brand.Add(new string[] { "C", "ㅋ", "CARTROLLEY", "카트롤리", "옮겨담아야 했던 마트의 카트를 대신해 장바구니로 사용 후엔 보관함까지 사용할 수 있는 활용성이 좋아 착한 소비를 할 수 있도록 도움을 주는 제품입니다.", "d", "한국", "1" });
+    brand.Add(new string[] { "D", "ㄷ", "Dalstrong", "달스트롱", "미국 아마존의 많은 평을 받고 있는 이 세라믹 칼은 오랜 기술력과 디자인으로 많은 사랑을 받은 제품입니다.", "d", "미국", "1" });
+    //brand.Add(new string[] { "G","ㄱ","GEEK TAILOR","긱테일러","1900년대 워크/엔지니어/밀리터리/스포츠 의류를 아카이브로하여 실용적 라이프스타일을 담은 긱테일러의 감성으로 현대적인 모던함속에 재해석하는 브랜드 입니다","d","한국","1"});
+    //brand.Add(new string[] { "M","ㅁ","themicrodesk","마이크로 데스크","책상 위의 키보드, 그 위에 책상을 얹는 방법으로 책상 위 공간활용의 장점을 살릴 수 있는 제품입니다.","d","미국","1"});
+    brand.Add(new string[] { "S","ㅅ","SUSU","수수","놀라운 흡수력과 증발력으로 늘 뽀송뽀송함을 유지해주는 발매트를 제작하는 브랜드 수수입니다.","d","일본","1"});
+    //brand.Add(new string[] { "S","ㅅ","slow-watches","슬로우 손목시계","하루를 표현하는 독특한 무브먼트를 지닌 손목시계로 하루를 받아들이는 자세 역시 생각하게 만드는 제품입니다.","d","독일","1"});
+    brand.Add(new string[] { "W","o","coolsnowglobes","워터 돔","작은 워터 돔 속에 펼쳐지는 다양한 스토리는 많은 이들에게 추억할 수 있게 하는 매력을 담은 제품입니다.","d","미국","1"});
+    //brand.Add(new string[] { "I","ㅇ","Il Bussetto","일부세토","이탈리아 토스카나 지방에서 옛부터 전해지는 가죽 가공 기술을 이용하여 특별한 감성 제품을 만드는 브랜드.","d","이탈리아","1"});
+    
+    brand.Add(new string[] { "Z","ㅈ","ZODAX","조닥","1990년 로스앤젤레스를 기반으로 설립된 브랜드로 홈 인테리어, 액세서리 등을 개발하고 디자인합니다.","d","미국","1"});
+    brand.Add(new string[] { "F", "ㅍ", "fiddlerselbow", "fiddlerselbow", "-", "d", "미국", "1" });
+    brand.Add(new string[] { "W","ㅇ","wristwidget","손목 근력 지원 밴드","스포츠 형태로 제작된 손목 밴드는 다양한 스포츠 선수들이 사용하고 있으며, 손목사용이 많은 사람들에게 많은 도움을 주고 있습니다.","d","미국","1"});
+    //brand.Add(new string[] { "H","ㅎ","HOWAY","호웨이","종이박스로 만들어진 ECO 친환경 제품이며 KC인증을 받은 디자인과 안전을 모두 생각한 종이가구","d","일본","1"});
+    brand.Add(new string[] { "A","ㅇ","anne-claire petit","앤클레어쁘띠","뛰어난 창의성을 가진 직물, 크로셰 디자인 브랜드로 인테리어 소품부터 액세서리, 아동용 제품 등을 수작업으로 제작합니다.","d","네덜란드","1"});
+
+    brand.Add(new string[] { "D","ㄷ","DYSON","다이슨","보유 특허수 1,300개 이상에 빛나는 다이슨은 매일 새로운 특허를 신청하는 기업으로, 언제나 새롭고 혁신적인 제품을 선보이고 있습니다.","r","영국","1"});
+    brand.Add(new string[] { "E","ㅇ","Electrolux","일렉트로룩스","무려 100년이 넘도록 [당신에게 꼭 맞는] 생활가전을 연구하고 있는 글로벌 브랜드입니다. 일렉트로룩스는 당신을 위해 먼저 생각합니다.","r","스웨덴","1"});
+    brand.Add(new string[] { "S","ㅅ","SONY","소니","워크맨과 트리니트론으로 세계 시장에서 상당히 유명해졌으며 2015년 현재 세계 TV 시장 점유율 3위권, 세계 반도체 판매 순위에서 20위권 내에 포함되는 기업","r","일본","1"});
+    brand.Add(new string[] { "P","ㅍ","PHILIPS","필립스","60개 이상의 국가에서 약 125,500명의 임직원들이 근무하는 다국적 기업으로 다양한 종류의 전자제품을 주로 생산하고 있습니다.","r","네덜란드","1"});
+    brand.Add(new string[] { "S","ㅅ","STANLEY","스탠리","발명가였던 윌리엄 스탠리 주니어가 탄생시킨 스탠리는 진공 보틀을 중심으로 100년간 삶속에서 아웃도어에서 동반자가 되고있습니다","r","미국","1"});
+    brand.Add(new string[] { "F","ㅍ","fitbit","핏비트","핏비트 제품은 걸음 수, 이동거리, 칼로리 소모량, 오른 층 수 등 활동량을 측정하고, 수면 패턴을 측정해 사용자가 스스로 자신의 건강 청사진을 그릴 수 있도록 돕는다.","r","미국","1"});
+    brand.Add(new string[] { "H","ㅎ","harman kardon","하만카돈","오디오, 내인포테인먼트 시스템 브랜드입니다. 전문 음향 장비에서부터 가정용 홈씨어터 및 자동차용 오디오 시스템에 이르기까지 다양한 분야에서 역량을 펼치고 있습니다.","r","미국","1"});
+    brand.Add(new string[] { "L","ㅇ","LG","엘지","1958년 국내최초의 라디오 개발에서 출발한 LG전자는 혁신적인 기술과 독창적인 제품을 기반으로 디지털 분야의 글로벌 리더로 성장했습니다.","r","한국","1"});
+    brand.Add(new string[] { "L","ㄹ","leatherman","레더맨","전 세계에서 가장 실용적이고 견고한 멀티툴 브랜드로서 인정받고 있습니다.","r","미국","1"});
+    brand.Add(new string[] { "G","ㄱ","GARMIN","가민","1989년 창립했으며 혁신, 편의성, 성능, 가치 및 서비스의 원칙에 기초하고 있습니다.","r","미국","1"});
+    brand.Add(new string[] { "G","ㄱ","GERBER","거버","유명한 나이프 제작자들이 디자인한 혁신적인 디자인과 양질의 나이프로 실용성 내구성까지 명성이 높아 세계인이 인정하는 브랜드 입니다","r","미국","1"});
+    brand.Add(new string[] { "M","ㅁ","magforce","맥포스","어떤 곳에서도 최적화된 전문 수납 장비를 출시해 왔으며 많은 택티컬 기어 및 아웃도어 회사들이 벤치마킹하는 택티컬의 원조","r","대만","1"});
+    brand.Add(new string[] { "M","ㅁ","Mystery-Ranch","미스태리랜치","1970년대부터 지금까지 익스페디션 유저들을 위한 특별한 기어 개발을 위해 노력하고 탐험가,특수부대,산악인등 모두가 인정하는 배낭 역사의 산증인입니다","r","미국","0"});
+    brand.Add(new string[] { "J","ㅈ","JBL","제이비엘","라이프스타일, 레코딩, 공연 전문 음향장비를 다루는 음향기기 전문 브랜드로써, 일반대중과 전문가들 모두에게 오래도록 사랑받고 있습니다.","r","미국","1"});
+    brand.Add(new string[] { "Y","ㅇ","YAMAHA","야마하","음악에 대한 헌신을 통해 우리가 쌓아온 전문성과 감성으로 전세계인들과 문화적인 영감을 함께 만들어가자는 목적","r","일본","1"});
+    brand.Add(new string[] { "S","ㅈ","SENNHEISER","젠하이저","유럽 헤드폰 시장 점유율 1위, 수많은 세계적인 뮤지션, 방송국, 전문가들이 애용하는 명품 사운드 회사입니다.","r","독일","1"});
+    brand.Add(new string[] { "S","ㅅ","SHURE","슈어","세계를 선도하는 마이크와 음향장비 제조회사로, 오디오 성능이 최우선으로 고려되는 환경에서 가장 먼저 선택되는 제품입니다.","r","미국","1"});
+    brand.Add(new string[] { "H","ㅇ","HP","에이치피","컴퓨터, 인터넷/인트라넷 솔루션, 서비스, 통신제품 및 측정 솔루션 등 여 러 첨단정보사업 분야에서 탁월한 제품의 성능과 지원으로 세계적인 명성을 얻고 있는 글로벌기업","r","미국","1"});
+    //brand.Add(new string[] { "R","ㄹ","Ruark","루악","루악 오디오는 가슴으로 느낄 수 있는 소리와 디자인을 하는 세계적인 하이앤드 스피커 제조 회사입니다.","r","영국","1"});
+    brand.Add(new string[] { "T","ㅌ","THULE","툴레","Bring Your Life, 툴레는 어디에서든 안전하면서 다양하고 액티브한 아웃도어 활동을 지원합니다.","r","스웨덴","1"});
+    brand.Add(new string[] { "W","ㅇ","WESTONE","웨스턴","ULTIMATE EARS를 시작으로 SHURE,ETYMOTIC등 유명한 해외 이어폰 브랜드 기술 전수받아 제품들을 발전한 기업","r","미국","1"});
+    brand.Add(new string[] { "X","ㅇ","XBOX","엑스박스","마이크로소프트(Microsoft Corporation)가 개발한 차세대 가정용 비디오게임기이다.","r","미국","1"});
+    brand.Add(new string[] { "B","ㅂ","BLUE AIR","블루에어","소비자의 삶을 보다 건강하고 안락하게 만드는 것을 미션으로 삼고 있는 북유럽 스웨덴의 공기청정기 전문 브랜드입니다.","r","스웨덴","1"});
+    brand.Add(new string[] { "B","ㅂ","Beurer","보이로","독일을 대표하는 세기의 브랜드로 선정되기도 했던 독일의 국민브랜드 보이로는 전세계 온열기기 시장에서 주목받고 있습니다.","r","독일","1"});
+    brand.Add(new string[] { "K","ㅋ","klean-kanteen","클린캔틴","2004년 처음으로 식품등급의 스테인리스로 만들어진 물병을 시장에 소개하며 환경과 건강을 최우선시 하는 브랜드 입니다","r","미국","1"});
+    brand.Add(new string[] { "L","ㄹ","LAMY","라미","최고의 독일 모던 디자인과 전통 엔지니어링 기술이 들어간 필기구 브랜드입니다.","r","독일","1"});
+    brand.Add(new string[] { "L","ㄹ","Logitech","로지텍","키보드, 마우스, 트랙 볼, 마이크, 게임 컨트롤러, 웹캠 등을 포함한 컴퓨터 주변 기기를 제조, 판매를 한다.","r","스위스","1"});
+    brand.Add(new string[] { "A","ㅇ","AMON MOVEMENT","아몬무브먼트","단정하면서 자유분방함을 느낄 수 있는 새롭고 다양한 제품을 추구합니다. 30년 이상 기술력과 노하우로 고집스러운 완성도와 라이프 스타일을 고려한 디자인을 고민 합니다.","r","한국","0"});
+    brand.Add(new string[] { "B","ㅂ","BAN HERTZ","벤헤르츠","독일디자이너를 기반으로한 오직 편안함과 디자인만을 생각한 캐쥬얼 핸드크레프트 슈즈 브랜드 입니다.","r","한국","0"});
+    brand.Add(new string[] { "B", "ㅂ", "Bindewerk", "빈데베르크", "작은 제본소에서 시작하여 품질을 인정받으며 총 21개국에서 만나볼 수 있는 뛰어난 품질의 노트 제조회사입니다.", "r", "독일", "0" });
+    brand.Add(new string[] { "B", "ㅂ", "black blum", "블랙엔블럼", "영국을 대표하는 디자인 생활용품 브랜드, 실용적이고 감각적인 미니멀리즘을 바탕으로 다양한 디자이너와 콜라보하고 있습니다.", "r", "영국", "0" });
+    brand.Add(new string[] { "C","ㅋ","CADO","카도","일본 소니 워크맨 신화의 핵심 엔지니어인 코가 노리유키와 스즈키 켄이 설립한 일본의 하이엔드 가전 전문회사입니다.","r","일본","0"});
+    brand.Add(new string[] { "C","ㄱ","CARAND’ACHE","까렌다쉬","다양한 색채의 색연필, 연필은 물론 세계 최초 샤프 펜슬을 만든 1915년 탄생한 전통있는 필기구 브랜드.","r","스위스","0"});
+    brand.Add(new string[] { "E","ㅇ","elago","엘라고","누구나 부담없이 사용할 수 있는 심플한 디자인과 금속,나무,가죽,플라스틱 등 다양한 소재를 통한 독착성을 가지고 있다.","r","한국","0"});
+    brand.Add(new string[] { "E","ㅇ","ESTEBAN","에스테반","지중해 문명과 일본의 세련미 사이의 중도에서 30여년의 세월을 거쳐 독특한 향의 세계 창조했습니다.","r","프랑스","0"});
+    brand.Add(new string[] { "F","ㅍ","Fiskars","피스카스","360년 전통의 컷팅 도구와 스틸 세팅의 우수한 역사를 가지고 있는 핀란드의 가장 오래된 기업중 하나입니다.","r","핀란드","0"});
+    brand.Add(new string[] { "F","ㅍ","FOPPAPEDRETTI","포빠페드레띠","원목 가구 시장에서 최고급 재료로 분류되는 너도밤나무를 기본 자재로 사용되는 70년 전통의 이탈리아 가구 브랜드.","r","이탈리아","0"});
+    brand.Add(new string[] { "S","ㅅ","Stalogy","스탈로지","디자인도 기능도 좋은 합리적인 깔끔한 문구 용품을 제작하는 브랜드로 문구의 스탠다드 레벨을 높이고자 합니다.","r","일본","0"});
+    brand.Add(new string[] { "H","ㅎ","Haoshi","하오쉬","2009년에 설립되어 좋은 것이라는 브랜드 뜻에 맞게 삶을 행복하고 흥미로운 것들로 채워주는 시계, 장식품 등의 디자인 소품 브랜드.","r","한국","0"});
+    brand.Add(new string[] { "H","ㅎ","HARIO","하리오","1921년 설립 이래로 실험관 유리 제작을 통해 안정성과 품질이 보증된 친환경 내열유리 제품을 개발합니다. ","r","일본","0"});
+    brand.Add(new string[] { "H","ㅇ","HAUTE CHOCO","오뜨초코","haute[F],고급의,상류사회의 뜻을 가진 불어의  haute와 chocolate의 합성어 처럼 전세계 최고급 브랜드이 초콜릿을 엄선하여 여러분께 소개해드립니다","r","한국","0"});
+    brand.Add(new string[] { "H","ㅎ","Helinox","헬리녹스","세계 유명브랜드의 텐트 폴을 제작하는 DAC의 브랜드로서 경량의 아웃도어 장비들을 생산하고 세계에서 인정받는 있는 대한민국 브랜드 입니다","r","한국","0"});
+    //brand.Add(new string[] { "H","ㅎ","HURED","휴레드","휴레드는 SCAA 미국 스페셜티커피협회 정식 멤버입니다 전문가들이 산지에서 직접 선별한 대륙별 다양한 싱글 오리진 다양한 커피관련 용품을 판매하고 있습니다","r","한국","0"});
+    //brand.Add(new string[] { "H","ㅎ","hwanghu","황후 초콜릿","건강에 이롭고,정직하며, 마음까지 위로 할 수 있는 초콜릿을 만들고 싶다는 생각으로 12년의 긴 연구 끝에 탄생한 발효 초콜릿 브랜드 황후 입니다","r","한국","0"});
+    brand.Add(new string[] { "J","ㅈ","JABRA","자브라","핸즈프리 전문 제조사로 시작한 자브라는 덴마크의 GN에 인수되면서 비즈니스, 스포츠, 차량용 등 다양한 영역의 핸즈프리 헤드셋을 개발하고 있습니다.","r","미국","0"});
+    brand.Add(new string[] { "k","ㅋ","keen","킨","킨은 혁실을 위해 노력합니다 '환경조건의 제한을 넘어서는 아웃도어' 산에서 바다까지 사막에서 도시까지 어떤 환경 조건의 제한을 받지 않습니다","","미국","0"});
+    brand.Add(new string[] { "M","ㅁ","Marley","말리","레게 음악의 전설인 밥말리를 기리기 위해 그의 아들인 '로한 말리'가 런칭한 음향기기 전문 브랜드입니다.","r","미국","0"});
+    brand.Add(new string[] { "M","ㅁ","MARNA","마나","일본의 리빙샵을 방문하면 어떤 곳이든지 만날 수 있는 140년 전통의 생활 청소용품 브랜드.","r","일본","0"});
+    brand.Add(new string[] { "M","ㅁ","MARVEL","마블","영감을 주고 공감되는 캐릭터들과 마블만의 놀라운 스토리텔링은 만화책과 영화, TV, 비디오 게임, 디지털 미디어를 통해 다양한 연령층의 팬들로부터 사랑을 받아 왔습니다.","r","미국","0"});
+    brand.Add(new string[] { "M","ㅁ","MENU","메뉴","1979년 덴마크에서 설립된 디자인 제품 브랜드로 독창성과 실용성이 겸비된 주방, 생활용품 등을 제작하는 모던 브랜드.","r","덴마크","0"});
+    brand.Add(new string[] { "M","ㅁ","Metier Atelier","메티에르아뜨리에","스테인리스 스틸을 주 소재로 독특한 디자인의 주방용품을 생산하는 홍콩 브랜드.","r","홍콩","0"});
+    brand.Add(new string[] { "M","ㅁ","MILAN","밀란","1918년 스페인에서 시작한 무독성 종합 문구 브랜드, 전통과 전문성으로 80가지 이상의 차별화된 제품을 선보입니다.","r","스페인","0"});
+    brand.Add(new string[] { "N","ㄴ","nitecore","나이트코어","밝기는 물론 튼튼한 내구성에 강인한 디자인으로 무장된 나이트 코어는 전세계적으로 최고의 랜턴, 라이트로 정평이 나있습니다","r","홍콩","0"});
+    brand.Add(new string[] { "N","ㄴ","Nomess Copenhagen","노메스코펜하겐","보다 쉽게 사용할 수 있는 단순한 기능과 세련된 북유럽 디자인을 추구하는 오피스, 수납, 생활용품 브랜드.","r","덴마크","0"});
+    brand.Add(new string[] { "O","ㅇ","OLE JENSEN","올레젠슨","세계 유명 디자이너들과 콜라보레이션을 통해 다양한 고품질의 기능성 가정용품을 보여주는 디자인 브랜드.","r","덴마크","0"});
+    brand.Add(new string[] { "P","ㅍ","PaperBlanks","페이퍼블랭크스","영국 대표 노트 브랜드로 20년 넘도록 하나의 작품같은 화려한 표지와 섬세한 수공 등, 우수한 노트를 개발하는 브랜드입니다.","r","영국","0"});
+    brand.Add(new string[] { "P","ㅍ","Pelican_","펠리칸","정리하고 쌓아 올리는 재미있는 수납, 주거 공간을 알차게 사용할 수 있는 수납용품 브랜드.","r","일본","0"});
+    //brand.Add(new string[] { "P","ㅍ","Pelican","펠리칸","특별한 주의를 요하는 산업용품, 스포츠용품, 각종 생활용품 등의 안전한 보관을 위해 전문 하드케이스를 제작하는 브랜드입니다.","r","미국","0"});
+    brand.Add(new string[] { "P","ㅍ","PLUMEN","플루멘","플루맨은 아름답고 아이디어 넘치며, 효율적인 조명을 생산하는 회사입니다.","r","영국","0"});
+    //brand.Add(new string[] { "p","ㅍ","podium","포듐","셀프 브랜딩으로 다시 태어나는 나만의 섬세한 커피 디잔인으로 완성되는 맛과 그 후에 오는 작은 행복을 전해 드립니다.","r","한국","0"});
+    brand.Add(new string[] { "R","ㄹ","recolte","레꼴드","수집하는 즐거움, 실용성과 디자인 돋보이는 소형 가전 브랜드로 1~2인 가구를 위한 컴팩트한 주방용품을 제시합니다.","r","한국","0"});
+    brand.Add(new string[] { "S","ㅅ","SEA TO SUMMIT","씨투써밋","전문적이고 다양한 등반 경험을 통해 얻은 많은 지식과 노하우는 직접 경험해 본 사람들만이 개발 할 수 있는 독창적인 아이디어의 상품을 개발합니다","r","호주","0"});
+    brand.Add(new string[] { "S","ㅅ","Skullcandy","스컬캔디","독특한 디자인과 정밀한 고음, 공격적인 저음의 프리미엄 음향기기 전문 브랜드입니다.","r","미국","0"});
+    brand.Add(new string[] { "S","ㅅ","SLOWEEKEND","슬로우위켄드","바쁜 일상 속의 현대인들을 위해 좀더 편안하고 합리적인 모던 캐쥬얼 의류들을 제공합니다. 완성도를 가치의 균형으로 두고 삶에 녹아들고자 하는 패션 브랜드 입니다.","r","한국","0"});
+    brand.Add(new string[] { "S","ㅅ","SOTO","소토","1978년 산업용 버너 제조회사로 설립되어 수년간의 노하우로 아웃도어 버너 시장에서도 최고로 인정 받고 있습니다","r","일본","0"});
+    brand.Add(new string[] { "S","ㅅ","SPEEDMINTON","스피드민턴","테니스,배드민턴,라켓볼이나 스쿼시의 장점이 혼합된 새로운 라켓스포츠","r","독일","0"});
+    brand.Add(new string[] { "T","ㅌ","Tala","탈라","100여년 전 제작도구와 기계를 사용하고 영국에서 수십년간 일해온 장인들에 의해 제작되는 베이킹 브랜드.","r","영국","0"});
+    brand.Add(new string[] { "T","ㅌ","Targus","타거스","세계 최초로 노트북가방을 만든 브랜드이며 고품질 카메라케이스,노트북 악세러리 등등의 제품 제조사이다.","r","영국","0"});
+    brand.Add(new string[] { "U","ㅇ","UNLIMIT","언리미트","언리미트는 contemporary한 감성으로 전개되는 브랜드입니다.베이직한 실루엣과 비비드한 색감으로 평범하지만 정형화 되지 않은 디자인과 합리적인 가격을 제시합니다.","r","한국","0"});
+    //brand.Add(new string[] { "V","ㅂ","Victoria Eggs","빅토리아에그스","표백 처리하지 않은 100% 프리미엄 면 재질로 영국에서 핸드메이드로 생산, 친환경 수성 잉크를 사용하는 패브릭 브랜드.","r","영국","0"});
+    brand.Add(new string[] { "W","ㅇ","wechonggakne","우리가총각네","성실한 생산자와 소비자 모두가 건강해지는 사이버 직거래 장터, 품질 좋은 먹거리 사이버 장터입니다","r","한국","0"});
+    //brand.Add(new string[] { "Z","ㅈ","ZESPA","제스파","건강, 미용 분야에 매진 해온 건강/미용 제조, 유통 및 개발 전문 기업입니다.","r","한국","0"});
+
+
+    string file = string.Empty;
+    if (System.Configuration.ConfigurationManager.AppSettings["IsLIVE"] == "0")
+    {
+        file = System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"];
+    }
+    else
+    {
+        file = (ViewBag.Country == "KR") ? System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"] : System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"].Replace("file3", "cdn3");
+    }
+    
+}
+
+    
+    <hr class="margin-top">
+
+    <section id="gallery-top" class="parallax" data-bottom-top="background-position: 50% 275px;" data-top-bottom="background-position: 50% -400px;" style="background-image: url('@file/image_03.jpg'); height:450px;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 divide-xl text-center">
+                    <h1 class="light" style="margin: 120px 0 15px 0;">Brand & Store</h1>                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="brandTitleDiv">
+        <a href="@Request.Url.AbsolutePath?t=d&c=@c">
+            <div class="tab@(t == "" || t == "d" ? "ON" : "") brandTab">
+                @ViewBag.Brand1
+            </div>
+        </a>
+        <a href="@Request.Url.AbsolutePath?t=r&c=@c">
+            <div class="tab@(t == "r" ? "ON" : "") brandTab">
+                @ViewBag.Brand2
+            </div>
+        </a>
+        <a href="/Store@(language)">
+            <div class="tab brandTab">
+                @ViewBag.Brand3
+            </div>
+        </a>
+</div>
+
+    <section id="services" class="white-bg" style="padding-bottom:40px">
+        <div class="container">
+            <div class="row divide-md brandSort">
+                
+                <a href="@Request.Url.AbsolutePath?t=@t"><div class="indexAll@(c == "" ? "ON" : "")">ALL</div></a>
+
+                @for (int i = 65; i < 91; i++)
+                {
+                    if (i != 81)
+                    {                        
+                        <a href="@Request.Url.AbsolutePath?t=@t&c=@Convert.ToChar(i)"><div class="index@(c == Convert.ToChar(i).ToString() ? "ON" : "")">@Convert.ToChar(i)</div></a>
+                    }
+                }
+                
+                @if (language == "/EN")
+                {                                   
+                    <br style="clear:both" />
+                    for (int i = 0; i < consonant.Length; i++)
+                    {
+                        if (i != 1 && i != 9) 
+                        { 
+                        <a href="@Request.Url.AbsolutePath?t=@t&c=@consonant[i].ToString()"><div class="index@(c == consonant[i].ToString() ? "ON" : "")">@consonant[i]</div></a>
+                        }
+                    }
+                }
+                <br /><p style="clear:both; height:20px;"></p>
+
+                @for (int i = 0; i < brand.Count; i++)
+                {
+                    if (brand[i][7] == "1" && (c == "" || c == brand[i][0] || c == brand[i][1]) && brand[i][5] == t)
+                    {
+                        <div class="brand">
+                            <div class="brandPlus">
+                                <img src="@file/brand/brand_logo_@(brand[i][2].Replace(" ", "")).png" class="brandHover">
+                                <p class="brandPlusIcon"><img src="@file/plus.png" class="brandPlusImg" /></p>
+                            </div>
+                            <div class="brandMinus">
+                                <div class="brandMinusDiv">@(brand[i][3]) (@(brand[i][2]))<br /><br />@brand[i][4]</div>
+                                <p class="brandMinusIcon"><img src="@file/minus.png" class="brandMinusImg" style="margin: -9px -5px -5px 0px;" /></p>
+                            </div>
+                        </div>
+                    }
+                }
+                @for (int i = 0; i < brand.Count; i++)
+                {
+                    if (brand[i][7] == "0" && (c == "" || c == brand[i][0] || c == brand[i][1]) && brand[i][5] == t) 
+                    { 
+                        <div class="brand">
+                            <div class="brandPlus">
+                                <img src="@file/brand/brand_logo_@(brand[i][2].Replace(" ", "")).png">
+                                <p class="brandPlusIcon"><img src="@file/plus.png" class="brandPlusImg" /></p>
+                            </div>
+                            <div class="brandMinus">
+                                <div class="brandMinusDiv">@(brand[i][3]) (@(brand[i][2]))<br /><br />@brand[i][4]</div>
+                                <p class="brandMinusIcon"><img src="@file/minus.png" class="brandMinusImg" style="margin: -9px -5px -5px 0px;" /></p>
+                            </div>
+                        </div>
+                    }        
+                }
+                
+
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        $(document).ready(function() {
+
+            $(".brandPlusImg").bind("mouseover", function () {
+                $(this).closest("div").css("display", "none");
+                $(this).closest("div").next().css("display", "block");
+            });
+
+            $(".brandMinus").bind("mouseout", function () {
+                $(this).closest("div").prev().css("display", "block");
+                $(this).hide();                                
+            });
+
+            @if (language == "/EN") 
+            {
+                @Html.Raw("$('.brandPlusIcon').hide();");
+            }
+            
+            var oriSrc = "";
+
+            @if (t == "" || t == "d")
+            {
+                <text>
+                $(".brandHover").hover(function () {    
+                    var me = $(this);
+                    oriSrc = $(this).attr("src");
+
+                    var _fileLen = oriSrc.length;
+                    var _lastDot = oriSrc.lastIndexOf('.');
+                    var _fileExt = oriSrc.substring(_lastDot, _fileLen).toLowerCase();
+
+                    $(this).attr("src", oriSrc.replace(_fileExt, '_on' + _fileExt))
+
+                    $(this).error(function() {
+                        $(this).attr("src", oriSrc)
+                    });
+
+                }, function () {
+                    $(this).attr("src", oriSrc)
+                 
+                });
+                </text>
+            }
+
+            
+
+        });
+
+    </script>
+    

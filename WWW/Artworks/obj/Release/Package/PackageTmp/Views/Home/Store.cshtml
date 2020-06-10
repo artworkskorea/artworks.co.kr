@@ -1,0 +1,90 @@
+﻿@{
+    string language = (ViewBag.Language == "English" ? "/KR" : "/EN");
+    string language2 = (language == "/EN" ? "e" : "h");
+    ViewBag.Title = "Artworks Korea - Store";
+    
+    string c = string.Empty;
+    if (Request.QueryString["c"] != null) { 
+        c = Request.QueryString["c"].ToUpper();
+    }
+    string t = "d";
+    if (Request.QueryString["t"] != null)
+    {
+        t = Request.QueryString["t"].ToLower();
+    }
+    
+    string file = string.Empty;
+    if (System.Configuration.ConfigurationManager.AppSettings["IsLIVE"] == "0")
+    {
+        file = System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"];
+    }
+    else
+    {
+        file = (ViewBag.Country == "KR") ? System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"] : System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"].Replace("file3", "cdn3");
+    }
+}
+
+    <hr class="margin-top">
+
+    <section id="gallery-top" class="parallax" data-bottom-top="background-position: 50% 275px;" data-top-bottom="background-position: 50% -400px;" style="background-image: url('@file/image_03.jpg'); height:450px;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 divide-xl text-center">
+                    <h1 class="light" style="margin: 120px 0 15px 0;">Brand & Store</h1>                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="brandTitleDiv">
+        <a href="/Brand@(language)?t=d&c=@c">
+            <div class="tab brandTab">
+                @ViewBag.Brand1
+            </div>
+        </a>
+        <a href="/Brand@(language)?t=r&c=@c">
+            <div class="tab brandTab">
+                @ViewBag.Brand2
+            </div>
+        </a>
+        <a href="/Store@(language)">
+            <div class="tabON brandTab">
+                @ViewBag.Brand3
+            </div>
+        </a>
+</div>
+
+    <section id="services" class="white-bg" style="padding-bottom:40px">
+        <div class="container">
+            <div class="row divide-md brandSort">
+                
+                <a href="http://www.lotte.com" target="_blank"><img src="@file/store/store_logo_lotte_@(language2).png" class="storeImg"></a>
+                <a href="http://www.ssg.com" target="_blank"><img src="@file/store/store_logo_ssg_@(language2).png" class="storeImg"></a>
+                <a href="http://www.cjmall.co.kr" target="_blank"><img src="@file/store/store_logo_cjmall_@(language2).png" class="storeImg"></a>
+                <a href="http://www.kakaocorp.com" target="_blank"><img src="@file/store/store_logo_kakao_@(language2).png" class="storeImg"></a>
+                <a href="http://www.11st.co.kr" target="_blank"><img src="@file/store/store_logo_11st_@(language2).png" class="storeImg"></a>
+                <a href="http://www.hmall.com" target="_blank"><img src="@file/store/store_logo_hmall_@(language2).png" class="storeImg"></a>
+                <a href="http://www.auction.co.kr" target="_blank"><img src="@file/store/store_logo_auction_@(language2).png" class="storeImg"></a>                
+                <a href="http://www.gmarket.co.kr" target="_blank"><img src="@file/store/store_logo_gmarket_@(language2).png" class="storeImg"></a>
+                <a href="http://www.gsshop.com" target="_blank"><img src="@file/store/store_logo_gsshop_@(language2).png" class="storeImg"></a>
+                <a href="http://www.coupang.com" target="_blank"><img src="@file/store/store_logo_coupang_@(language2).png" class="storeImg"></a>
+                <a href="http://storefarm.naver.com/funshopfunshop" target="_blank"><img src="@file/store/store_logo_naversf_@(language2).png" class="storeImg"></a>
+                <a href="http://www.lotteimall.com" target="_blank"><img src="@file/store/store_logo_lottehome_@(language2).png" class="storeImg"></a>
+                <a href="http://www.tmon.co.kr" target="_blank"><img src="@file/store/store_logo_tmon_@(language2).png" class="storeImg"></a>
+                <a href="http://www.wemakeprice.com" target="_blank"><img src="@file/store/store_logo_wemp_@(language2).png" class="storeImg"></a>
+                <a href="http://www.wizwid.com " target="_blank"><img src="@file/store/store_logo_wizwid_@(language2).png" class="storeImg"></a>
+                <a href="http://www.galleria.co.kr" target="_blank"><img src="@file/store/store_logo_galleria_@(language2).png" class="storeImg"></a>
+                <a href="http://www.akmall.co.kr" target="_blank"><img src="@file/store/store_logo_akmall_@(language2).png" class="storeImg"></a>
+                <a href="http://www.hanssem.com" target="_blank"><img src="@file/store/store_logo_hanssem_@(language2).png" class="storeImg"></a>
+                <a href="http://www.chosun.com" target="_blank"><img src="@file/store/store_logo_chosun_@(language2).png" class="storeImg"></a>
+                <a href="http://www.emart.co.kr" target="_blank"><img src="@file/store/store_logo_emartmall_@(language2).png" class="storeImg"></a>
+                <a href="http://www.compuzone.co.kr" target="_blank"><img src="@file/store/store_logo_compuzone_@(language2).png" class="storeImg"></a>
+                <a href="http://www.10x10.co.kr" target="_blank"><img src="@file/store/store_logo_1010_@(language2).png" class="storeImg"></a>
+                <a href="http://www.boribori.co.kr" target="_blank"><img src="@file/store/store_logo_bori_@(language2).png" class="storeImg"></a>
+                    
+            </div>
+        </div>
+    </section>
+
+   

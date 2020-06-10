@@ -1,0 +1,153 @@
+﻿@{
+    string language = (ViewBag.Language == "English" ? "/KR" : "/EN");
+    string language2 = (language == "/EN" ? "h" : "e"); 
+    string file = string.Empty;
+
+    if (System.Configuration.ConfigurationManager.AppSettings["IsLIVE"] == "0")
+    {
+        file = System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"];
+    }
+    else
+    {
+        file = (ViewBag.Country == "KR") ? System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"] : System.Configuration.ConfigurationManager.AppSettings["HTTPFILE3"].Replace("file3", "cdn3");
+    }
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="Artworks Korea. the most famous online shopping commerce among the early adapters in Korea.">
+    <meta name="keywords" content="artworkskorea">
+    <meta name="author" content="artworks korea">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="아트웍스코리아(Artworks Korea)">
+    <meta property="og:description" content="아트웍스코리아(Artworks Korea) 기업 웹사이트 ">
+    <meta property="og:image" content="@file/artworks/logo.png">
+    <meta property="og:url" content="http://www.artworks.co.kr">
+    <script src="/Scripts/modernizr.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="//funshop.akamaized.net/artworks/favicon.ico" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css">
+    <link href="/Content/style.css?0708" rel="stylesheet">
+    <link href="/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="/Content/et-line/et-line.css" rel="stylesheet">
+    <link href="/Content/magnific-popup.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400,500,700' rel='stylesheet' type='text/css'>
+    @*<link rel="image_src" href="thumbnail.png">*@
+    <!--link rel="icon" type="image/x-icon" href="favicon.ico"-->
+    <!-- HTML5 shiv and Respond.js for IE8 support of HTML5 elements and media queries. All other JS at the end of file. -->
+    <!-- [if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="/Scripts/respond.min.js"></script>
+    <![endif]-->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="/Scripts/jquery.min.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="61">
+
+
+    <div class="preloader">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-transparent navbar-fixed-top" role="navigation" data-start="padding: 10px 0px; background: #212121;" data-20p="padding: 0px 0px; background: #212121;">
+        <div class="navbar-container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/index@(language)" class="navbar-brand">
+                    <img src="@file/logo.png" alt="">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#intro">@ViewBag.Home</a></li>
+                    <li><a href="@((Request.Url.AbsolutePath == "/" || Request.Url.AbsolutePath.Contains("/index")) ? "" : "/index" + language)#services">@ViewBag.Services</a></li>
+                    <li><a href="/brand@(language)">@ViewBag.Brand</a></li>
+                    <li><a href="/store@(language)">@ViewBag.Store</a></li>
+                    <li><a href="@((Request.Url.AbsolutePath == "/" ) ? "" : "/index")@((Request.Url.AbsolutePath == "/" ? "" : (ViewBag.Language == "English" ? "/KR" : "/EN")))#contact">@ViewBag.Contact</a></li>
+                    <li><a href="@(Request.Url.AbsolutePath == "/" ? "index" : "")@Request.Url.AbsolutePath.Replace((ViewBag.Language == "English" ? "/KR" : "/EN"), "")@((ViewBag.Language == "English" ? "/EN" : "/KR"))">@ViewBag.Language</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="row text-center">
+                <!-- Footer logo -->
+                <div class="clearfix"></div>
+                <div class="divide-md"></div>
+                <a href="http://www.funshop.co.kr" target=_blank>
+                    <img src="@file/logo-footer.png" alt="">
+                </a>
+                <!-- Social networks -->
+                <div class="col-sm-12 divide-xs footer-social-icons">
+                    <a target="_blank" title="Facebook" href="http://www.facebook.com/funshopkr"><i class="fa fa-facebook"></i></a>
+                </div>
+                <!-- Copyright -->
+                <div class="col-sm-12 divide-xs">
+                    <p><span class="footer-copy">&copy; Artworks Korea</span><br><small>2000 - @DateTime.Now.Year</small></p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="divide-sm"></div>
+            </div>
+        </div>
+        <div class="back-to-top">
+            <a class="link-to-top" href="#intro">
+                <i class="fa fa-caret-up"></i>
+            </a>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/retina.js"></script>
+    <script src="/Scripts/imagesloaded.min.js"></script>
+    <script src="/Scripts/skrollr.js"></script>
+    <!--[if lt IE 9]>
+        <script src="skrollr.ie.js"></script>
+    <![endif]-->
+    <script src="/Scripts/jquery.scrollto.min.js"></script>
+    <script src="/Scripts/jquery.easing.js"></script>
+    <script src="/Scripts/jquery.localscroll.min.js"></script>
+    <script src="/Scripts/smoothscroll.js"></script>
+    <script src="/Scripts/ekko-lightbox.min.js"></script>
+    <script src="/Scripts/jquery.magnific-popup.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="/Scripts/jquery.form.js"></script>
+    <script src="/Scripts/jquery.flowuplabels.js"></script>
+    <script src="/Scripts/custom.js?1214"></script>
+    <script src="~/Scripts/jquery.bxslider.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-21714953-14', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
